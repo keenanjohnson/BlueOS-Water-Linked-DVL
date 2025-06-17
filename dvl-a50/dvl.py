@@ -53,7 +53,7 @@ class DvlDriver(threading.Thread):
     enabled = True
     rangefinder = True
     beam_distances_enabled = True  # New setting for individual beam distances
-    hostname = HOSTNAME
+    hostname = os.environ.get("DVL_HOSTNAME", HOSTNAME)
     timeout = 3  # tcp timeout in seconds
     origin = [0, 0]
     settings_path = os.path.join(os.path.expanduser("~"), ".config", "dvl", "settings.json")
@@ -165,6 +165,12 @@ class DvlDriver(threading.Thread):
         self.wait_for_cable_guy()
         ip = self.hostname
         self.status = f"Trying to talk to dvl at http://{ip}/api/v1/about"
+        
+        # In test mode, skip the DVL discovery and try to connect directly
+        if os.environ.get("DVL_TEST_MODE", "false").lower() == "true":
+            logger.info(f"Test mode: Attempting direct connection to {ip}")
+            return
+        
         while not self.version:
             if not request(f"http://{ip}/api/v1/about"):
                 self.report_status(f"could not talk to dvl at {ip}, looking for it in the local network...")
@@ -176,6 +182,10 @@ class DvlDriver(threading.Thread):
             time.sleep(1)
 
     def wait_for_cable_guy(self):
+        # Skip cable-guy check if running in test mode
+        if os.environ.get("DVL_TEST_MODE", "false").lower() == "true":
+            logger.info("Running in test mode, skipping cable-guy check")
+            return
         while not request("http://host.docker.internal/cable-guy/v1.0/ethernet"):
             self.report_status("waiting for cable-guy to come online...")
             time.sleep(1)
@@ -184,6 +194,10 @@ class DvlDriver(threading.Thread):
         """
         Waits for a valid heartbeat to Mavlink2Rest
         """
+        # Skip vehicle check if running in test mode
+        if os.environ.get("DVL_TEST_MODE", "false").lower() == "true":
+            logger.info("Running in test mode, skipping vehicle heartbeat check")
+            return
         self.report_status("Waiting for vehicle...")
         while not self.mav.get("/HEARTBEAT"):
             time.sleep(1)

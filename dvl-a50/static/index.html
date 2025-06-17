@@ -211,9 +211,9 @@
 						if (this.newHostname == null) {
 							this.newHostname = data.hostname
 						}
-						this.beamDistancesEnabled = data.beamDistancesEnabled
-						this.beamDistances = data.beamDistances
-						this.beamValid = data.beamValid
+						this.beamDistancesEnabled = data.beam_distances_enabled
+						this.beamDistances = data.beam_distances
+						this.beamValid = data.beam_valid
 					})
 					.catch((error) => {
 						this.status = `Unable to talk to DVL service: ${error}`
