@@ -2,6 +2,9 @@
 
 ## Changelog
 
+### v1.0.8
+  - Added individual DVL beam distances
+
 ### v1.0.7
   - Fix using lat/long inputs with no internet
 
