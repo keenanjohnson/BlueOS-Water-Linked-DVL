@@ -462,20 +462,6 @@ class DvlDriver(threading.Thread):
             self.mav.send_vision_position_estimate(
                 self.timestamp, [x, y, z], self.current_attitude, reset_counter=self.reset_counter
             )
-        
-        # Extra Credit: Send GLOBAL_VISION_POSITION_ESTIMATE with DVL AHRS data
-        # This allows comparison between ArduSub's AHRS and the DVL's AHRS
-        if "roll" in data and "pitch" in data and "yaw" in data:
-            dvl_attitude = (data["roll"], data["pitch"], data["yaw"])
-            # Convert to degrees since send_vision_position_estimate expects degrees
-            dvl_attitude_deg = [math.degrees(angle) for angle in dvl_attitude]
-            
-            # Send as a separate vision position estimate with DVL's attitude data
-            # Using timestamp + 1 to distinguish from regular position estimate
-            self.mav.send_vision_position_estimate(
-                self.timestamp + 1, [data["x"], data["y"], data["z"]], 
-                dvl_attitude_deg, reset_counter=self.reset_counter + 1000
-            )
 
     def check_temperature(self):
         now = time.time()
