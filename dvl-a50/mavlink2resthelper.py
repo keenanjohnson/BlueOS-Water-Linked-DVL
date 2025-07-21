@@ -368,13 +368,13 @@ class Mavlink2RestHelper:
         Send individual beam distances from DVL transducers as separate DISTANCE_SENSOR messages
         Each beam gets a different orientation to work around ArduSub's single rangefinder per orientation limitation
         """
-        # Define orientations for each beam (0=front-left, 1=front-right, 2=back-right, 3=back-left)
+        # Define orientations for each beam (1=rear-right, 2=rear-left, 3=front-left, 4=front-right)
         # These orientations represent the 4 quadrants around the DVL
         beam_orientations = [
-            "MAV_SENSOR_ROTATION_YAW_315",  # Beam 0: Front-left (315 degrees)
-            "MAV_SENSOR_ROTATION_YAW_45",   # Beam 1: Front-right (45 degrees) 
-            "MAV_SENSOR_ROTATION_YAW_135",  # Beam 2: Back-right (135 degrees)
-            "MAV_SENSOR_ROTATION_YAW_225"   # Beam 3: Back-left (225 degrees)
+            "MAV_SENSOR_ROTATION_YAW_135",  # rear-right
+            "MAV_SENSOR_ROTATION_YAW_225",  # rear-left
+            "MAV_SENSOR_ROTATION_YAW_315",  # front-left 
+            "MAV_SENSOR_ROTATION_YAW_45"    # front-right
         ]
         
         for i, (distance, valid) in enumerate(zip(beam_distances, beam_valid)):

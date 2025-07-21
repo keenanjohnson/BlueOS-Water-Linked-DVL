@@ -68,27 +68,27 @@
 								
 								<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px;">
 									<div style="border: 1px solid #ccc; padding: 10px; text-align: center;">
-										<div style="font-weight: bold;">Beam 0 (Front-Left)</div>
+										<div style="font-weight: bold;">Beam 3 (Front-Left)</div>
 										<div style="font-size: 18px;" :style="{ color: beamValid[0] ? '#4caf50' : '#f44336' }">
-											{{ beamValid[0] ? (beamDistances[0]).toFixed(2) + ' m' : 'Invalid' }}
-										</div>
-									</div>
-									<div style="border: 1px solid #ccc; padding: 10px; text-align: center;">
-										<div style="font-weight: bold;">Beam 1 (Front-Right)</div>
-										<div style="font-size: 18px;" :style="{ color: beamValid[1] ? '#4caf50' : '#f44336' }">
-											{{ beamValid[1] ? (beamDistances[1]).toFixed(2) + ' m' : 'Invalid' }}
-										</div>
-									</div>
-									<div style="border: 1px solid #ccc; padding: 10px; text-align: center;">
-										<div style="font-weight: bold;">Beam 2 (Back-Right)</div>
-										<div style="font-size: 18px;" :style="{ color: beamValid[2] ? '#4caf50' : '#f44336' }">
 											{{ beamValid[2] ? (beamDistances[2]).toFixed(2) + ' m' : 'Invalid' }}
 										</div>
 									</div>
 									<div style="border: 1px solid #ccc; padding: 10px; text-align: center;">
-										<div style="font-weight: bold;">Beam 3 (Back-Left)</div>
-										<div style="font-size: 18px;" :style="{ color: beamValid[3] ? '#4caf50' : '#f44336' }">
+										<div style="font-weight: bold;">Beam 4 (Front-Right)</div>
+										<div style="font-size: 18px;" :style="{ color: beamValid[1] ? '#4caf50' : '#f44336' }">
 											{{ beamValid[3] ? (beamDistances[3]).toFixed(2) + ' m' : 'Invalid' }}
+										</div>
+									</div>
+									<div style="border: 1px solid #ccc; padding: 10px; text-align: center;">
+										<div style="font-weight: bold;">Beam 1 (Back-Right)</div>
+										<div style="font-size: 18px;" :style="{ color: beamValid[2] ? '#4caf50' : '#f44336' }">
+											{{ beamValid[0] ? (beamDistances[0]).toFixed(2) + ' m' : 'Invalid' }}
+										</div>
+									</div>
+									<div style="border: 1px solid #ccc; padding: 10px; text-align: center;">
+										<div style="font-weight: bold;">Beam 2 (Back-Left)</div>
+										<div style="font-size: 18px;" :style="{ color: beamValid[3] ? '#4caf50' : '#f44336' }">
+											{{ beamValid[1] ? (beamDistances[1]).toFixed(2) + ' m' : 'Invalid' }}
 										</div>
 									</div>
 								</div>
